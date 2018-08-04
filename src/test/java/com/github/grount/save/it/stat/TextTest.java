@@ -3,7 +3,7 @@ package com.github.grount.save.it.stat;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TextTest {
 
@@ -13,7 +13,8 @@ class TextTest {
         JSONObject expectedJson = new JSONObject();
         expectedJson.put("title", "title");
         expectedJson.put("content", "content");
+        expectedJson.put("id", type.getJsonObject().get("id"));
 
-        assertTrue(type.convertToJSON().equals(expectedJson.toString()));
+        assertEquals(type.convertToJson(), expectedJson.toString());
     }
 }
