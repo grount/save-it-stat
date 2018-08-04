@@ -45,7 +45,6 @@ public class JsonGenerator {
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Cannot save type to json: {0}", e.getMessage());
         }
-
     }
 
     private static void appendTypeToExistingJson() {
@@ -58,7 +57,7 @@ public class JsonGenerator {
         }
     }
 
-    private static void appendToJson(JSONObject jsonObject) {
+    private static void appendToJson(JSONObject jsonObject) throws IOException {
         JSONArray jsonArray = jsonObject.getJSONArray(ELEMENTS_NAME);
         jsonArray.put(type.getJsonObject());
 
@@ -66,9 +65,6 @@ public class JsonGenerator {
             JSONObject parent = new JSONObject();
             parent.put(ELEMENTS_NAME, jsonArray);
             bw.write(parent.toString());
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Cannot save type to json: {0}", e.getMessage());
         }
-
     }
 }
