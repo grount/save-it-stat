@@ -14,20 +14,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class GlobalConfigurationsTest {
     static InputStream inputStream;
-    static Properties properties;
+    static Properties properties = new Properties();
     final String defaultLocation = "default.location";
-
-    @BeforeAll
-    static void initAll() throws IOException {
-        inputStream = new FileInputStream("config.properties");
-        properties = new Properties();
-    }
 
     @Test
     @DisplayName("Test global configuration output default location")
     void setDefaultConfigurations_defaultLocation_Exists() throws IOException {
         GlobalConfigurations.setDefaultConfigurations();
-
+        inputStream = new FileInputStream("config.properties");
         properties.load(inputStream);
         String value = properties.getProperty(defaultLocation);
 
@@ -39,6 +33,7 @@ class GlobalConfigurationsTest {
     void setConfigurationValue_setsGlobalConfiguration_ifKeyExists() throws IOException {
         String value = "some_value";
         GlobalConfigurations.setConfigurationValue(defaultLocation, value);
+        inputStream = new FileInputStream("config.properties");
         properties.load(inputStream);
 
         String defaultLocationProperty = properties.getProperty(defaultLocation);

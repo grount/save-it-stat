@@ -40,8 +40,8 @@ public class GlobalConfigurations {
     public static void setConfigurationValue(String key, String value) {
         if (configurations.contains(key))
             setValidConfigurationValue(key, value);
-         else
-             throw new IllegalArgumentException("Please set valid configuration key");
+        else
+            throw new IllegalArgumentException("Please set valid configuration key");
     }
 
     private static void setValidConfigurationValue(String key, String value) {
