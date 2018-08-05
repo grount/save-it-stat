@@ -40,3 +40,4 @@ buildNumber.properties
 
 # Project based
 config.properties
+elements.json
