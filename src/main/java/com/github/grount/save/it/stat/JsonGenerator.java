@@ -17,8 +17,8 @@ import java.util.logging.Logger;
 public class JsonGenerator {
     private static final LogManager logManager = LogManager.getLogManager();
     private static final Logger logger = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private static final String ELEMENTS_JSON = "elements.json";
     private static final String ELEMENTS_NAME = "elements";
+    private static final String ELEMENTS_JSON = ELEMENTS_NAME + ".json";
     private static Path path;
     private static Type type;
 
