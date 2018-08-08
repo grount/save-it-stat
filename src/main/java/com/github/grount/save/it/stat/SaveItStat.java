@@ -7,11 +7,11 @@ public class SaveItStat {
             new FileBase(Constants.FILE_EXISTENCE_LOCATION, JSONObject::new);
 
     public static void main(String[] args) {
+        initialize();
     }
 
-    public static void initalize() {
-        String key = "is.elements.exists";
+    public static void initialize() {
         String value = "0";
-        Utils.createJsonWithField(fileBase, key, value);
+        Utils.createJsonWithField(fileBase, Constants.IS_ELEMENTS_EXISTS, value);
     }
 }
