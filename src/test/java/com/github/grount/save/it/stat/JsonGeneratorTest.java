@@ -27,43 +27,29 @@ class JsonGeneratorTest {
     @Test
     @DisplayName("Generate function creates json if not exists")
     void generate_ifJsonDidNotExists_createIt() {
-        deleteFileIfExists();
+        TestUtils.deleteIfFilesExists(path);
         generateAndAssertFileExists();
     }
 
     @Test
     @DisplayName("Generate function creates json with correct fields")
     void generate_createsJson_withFieldsExists() {
-        deleteFileIfExists();
+        TestUtils.deleteIfFilesExists(path);
         generateAndAssertFileExists();
-        assertTrue(getFileContent().contains(type.convertToJson()));
+        assertTrue(TestUtils.getFileContent(path).contains(type.convertToJson()));
     }
 
-    private String getFileContent() {
-        List<String> lines = null;
 
-        try {
-            lines = Files.readAllLines(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return lines != null ? lines.toString() : "";
-    }
-
-    private void deleteFileIfExists() {
-        if (path.toFile().exists())
-            path.toFile().delete();
-    }
 
     @Test
     @DisplayName("Generate function appends to json if it exists")
     void generate_ifJsonExists_appendToIt() {
         Type newType = new Text("Another title", "Even better content");
-        deleteFileIfExists();
+        TestUtils.deleteIfFilesExists(path);
         JsonGenerator.generate(type);
         JsonGenerator.generate(newType);
-        String fileContent = getFileContent();
+        String fileContent = TestUtils.getFileContent(path);
 
         assertAll(() -> assertTrue(fileContent.contains(type.convertToJson())),
                 () -> assertTrue(fileContent.contains(newType.convertToJson()))
