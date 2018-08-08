@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   tryRequireElements = () => {
-    const file_existence = require('../file-existence');
+    const file_existence = require('../file-existence.json');
     if (file_existence["is.elements.exists"] === "1") {
       return require('../elements.json');
     } else {
@@ -22,7 +22,7 @@ class App extends Component {
   generateElements = () => {
     const elements = this.state.json ? this.state.json.elements.map(element => {
       return <Element
-        id={element.id}
+        key={element.id}
         title={element.title}
         text={element.content}
       />
