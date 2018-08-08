@@ -21,7 +21,7 @@ class GlobalConfigurationsTest {
     @DisplayName("Test global configuration output default location")
     void setDefaultConfigurations_defaultLocation_Exists() throws IOException {
         GlobalConfigurations.setDefaultConfigurations();
-        inputStream = new FileInputStream("config.properties");
+        inputStream = new FileInputStream(Constants.DEFAULT_PATH + "config.properties");
         properties.load(inputStream);
         String value = properties.getProperty(defaultLocation);
 
@@ -33,7 +33,7 @@ class GlobalConfigurationsTest {
     void setConfigurationValue_setsGlobalConfiguration_ifKeyExists() throws IOException {
         String value = "some_value";
         GlobalConfigurations.setConfigurationValue(defaultLocation, value);
-        inputStream = new FileInputStream("config.properties");
+        inputStream = new FileInputStream(Constants.DEFAULT_PATH + "config.properties");
         properties.load(inputStream);
 
         String defaultLocationProperty = properties.getProperty(defaultLocation);

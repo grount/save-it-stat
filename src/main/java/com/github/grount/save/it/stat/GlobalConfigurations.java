@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class GlobalConfigurations {
     private static final String PROPERTIES_LOCATION = "config.properties";
-    private static final Path path = Paths.get(PROPERTIES_LOCATION);
+    private static final Path path = Paths.get(Constants.DEFAULT_PATH + PROPERTIES_LOCATION);
     private static final LogManager logManager = LogManager.getLogManager();
     private static final Logger logger = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private static final Set<String> configurations = new HashSet<>(Arrays.asList("default.location"));

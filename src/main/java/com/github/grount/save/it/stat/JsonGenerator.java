@@ -27,7 +27,7 @@ public class JsonGenerator {
 
     public static void generate(@Nonnull Type type) {
         JsonGenerator.type = type;
-        path = Paths.get(ELEMENTS_JSON);
+        path = Paths.get(Constants.DEFAULT_PATH + ELEMENTS_JSON);
 
         if (path.toFile().exists())
             appendTypeToExistingJson();

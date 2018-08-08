@@ -20,7 +20,7 @@ class JsonGeneratorTest {
     @BeforeAll
     static void initAll() {
         type = new Text("myTitle", "Awesome content");
-        path = Paths.get("elements.json");
+        path = Paths.get(Constants.DEFAULT_PATH + "elements.json");
     }
 
 
@@ -72,6 +72,6 @@ class JsonGeneratorTest {
 
     private void generateAndAssertFileExists() {
         JsonGenerator.generate(type);
-        assertTrue(Paths.get("elements.json").toFile().exists());
+        assertTrue(Paths.get( Constants.DEFAULT_PATH + "elements.json").toFile().exists());
     }
 }
