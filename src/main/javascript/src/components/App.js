@@ -6,14 +6,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json: this.tryRequireJson()
+      json: this.tryRequireElements()
     }
   }
 
-  tryRequireJson = () => {
-    try {
+  tryRequireElements = () => {
+    const file_existence = require('../file-existence');
+    if (file_existence["is.elements.exists"] === "1") {
       return require('../elements.json');
-    } catch (err) {
+    } else {
       return null;
     }
   }

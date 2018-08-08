@@ -1,5 +1,6 @@
 package com.github.grount.save.it.stat;
 
+import javax.annotation.Nonnull;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Supplier;
@@ -12,7 +13,7 @@ public class FileBase<T> {
     private Supplier<T> fileType;
     private Path path;
 
-    FileBase(String path, Supplier<T> fileType) {
+    FileBase(@Nonnull String path, @Nonnull Supplier<T> fileType) {
         this.path = Paths.get(path);
         this.fileType = fileType;
     }

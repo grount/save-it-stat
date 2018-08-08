@@ -42,4 +42,22 @@ public class Utils {
                     String.format(WRITING_TO_FILE_ERROR_MESSAGE, Constants.FILE_EXISTENCE_NAME, e.getMessage()));
         }
     }
+
+    protected static void setJsonField(FileBase fileBase, String key, String value) {
+        try {
+            String jsonContent = new String(Files.readAllBytes(fileBase.getPath()));
+            JSONObject jsonObject = new JSONObject(jsonContent);
+            jsonObject.put(key, value);
+            writeGivenJsonToFile(fileBase, jsonObject);
+        } catch (IOException e) {
+            fileBase.getLogger().log(Level.SEVERE,
+                    String.format(WRITING_TO_FILE_ERROR_MESSAGE, Constants.FILE_EXISTENCE_NAME, e.getMessage()));
+        }
+    }
+
+    private static void writeGivenJsonToFile(FileBase fileBase, JSONObject jsonObject) throws IOException {
+        try (BufferedWriter bw = Files.newBufferedWriter(fileBase.getPath())) {
+            bw.write(jsonObject.toString());
+        }
+    }
 }
