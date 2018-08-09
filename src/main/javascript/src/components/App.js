@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Element from './Element';
+import ElementsFactory from './ElementsFactory';
 import { ListGroup, Container } from 'reactstrap';
 
 class App extends Component {
@@ -40,11 +40,7 @@ class App extends Component {
 
   generateElements = () => {
     const elements = !this.isEmpty(this.state.json) ? this.state.json.elements.map(element => {
-      return <Element
-        key={element.id}
-        title={element.title}
-        text={element.content}
-      />
+      return ElementsFactory.build(element)
     }) : null;
     return elements;
   }
