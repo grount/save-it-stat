@@ -41,8 +41,6 @@ buildNumber.properties
 # Project based
 config.properties
 elements.json
-.mvn/node
-file-existence.json
 
 # dependencies
 **/node_modules
