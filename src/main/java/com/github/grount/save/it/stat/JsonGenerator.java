@@ -26,9 +26,6 @@ public class JsonGenerator {
             appendTypeToExistingJson();
         else
             createJsonWithType(type.getJsonObject());
-
-        Utils.setJsonField(new FileBase(Constants.FILE_EXISTENCE_LOCATION, JSONObject::new),
-                Constants.IS_ELEMENTS_EXISTS, "1");
     }
 
     private static void createJsonWithType(JSONObject objectToWrite) {

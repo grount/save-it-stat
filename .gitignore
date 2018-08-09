@@ -40,7 +40,7 @@ buildNumber.properties
 
 # Project based
 config.properties
-elements.json
+file-existence.json
 
 # dependencies
 **/node_modules

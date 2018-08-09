@@ -1,6 +1,7 @@
 package com.github.grount.save.it.stat;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,16 +13,14 @@ import java.nio.file.Paths;
 import static com.github.grount.save.it.stat.Constants.FILE_EXISTENCE_LOCATION;
 import static com.github.grount.save.it.stat.Constants.IS_ELEMENTS_EXISTS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UtilsTest {
-    private Path path = Paths.get(FILE_EXISTENCE_LOCATION);
-    private FileBase fileBase = new FileBase(FILE_EXISTENCE_LOCATION, JSONObject::new);
+    private static Path path = Paths.get(FILE_EXISTENCE_LOCATION);
+    private static FileBase fileBase = new FileBase(FILE_EXISTENCE_LOCATION, JSONObject::new);
 
-    @Test
-    @DisplayName("existence-file.json needs to exists")
-    void existenceFileNeedsToExist() {
-        assertTrue(path.toFile().exists());
+    @AfterAll
+    static void deleteTestingFile() {
+        TestUtils.deleteIfFilesExists(path);
     }
 
     @Test

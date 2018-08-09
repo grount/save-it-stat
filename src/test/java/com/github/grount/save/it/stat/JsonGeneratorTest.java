@@ -4,11 +4,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,7 +19,6 @@ class JsonGeneratorTest {
         type = new Text("myTitle", "Awesome content");
         path = Paths.get(Constants.DEFAULT_PATH + "elements.json");
     }
-
 
     @Test
     @DisplayName("Generate function creates json if not exists")
@@ -38,9 +34,6 @@ class JsonGeneratorTest {
         generateAndAssertFileExists();
         assertTrue(TestUtils.getFileContent(path).contains(type.convertToJson()));
     }
-
-
-
 
     @Test
     @DisplayName("Generate function appends to json if it exists")
@@ -58,6 +51,6 @@ class JsonGeneratorTest {
 
     private void generateAndAssertFileExists() {
         JsonGenerator.generate(type);
-        assertTrue(Paths.get( Constants.DEFAULT_PATH + "elements.json").toFile().exists());
+        assertTrue(Paths.get(Constants.ELEMENTS_PATH).toFile().exists());
     }
 }
