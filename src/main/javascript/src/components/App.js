@@ -6,10 +6,9 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      json: this.tryRequireElements()
+      json: this.tryRequireElements(),
     }
   }
-
   tryRequireElements = () => {
     return require('../elements.json');
   }
@@ -40,7 +39,7 @@ class App extends Component {
 
   generateElements = () => {
     const elements = !this.isEmpty(this.state.json) ? this.state.json.elements.map(element => {
-      return ElementsFactory.build(element)
+      return ElementsFactory.build(element);
     }) : null;
     return elements;
   }

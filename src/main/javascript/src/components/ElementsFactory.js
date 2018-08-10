@@ -4,7 +4,6 @@ import TodoElement from "./TodoElement";
 
 export default class ElementsFactory {
   static build(element) {
-    console.log(element);
     switch (element.type) {
       case "text":
         return (

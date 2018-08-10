@@ -10,9 +10,8 @@ export default class TodoElement extends Component {
                 <ListGroupItemHeading>{this.props.title}</ListGroupItemHeading>
                 <Checkbox
                     content={this.props.content}
-                    handleCheckBoxChange={null}
-                    isChecked={this.props.isChecked}
                     key={this.props.id}
+                    id={this.props.id}
                 />
             </ListGroupItem>
         );

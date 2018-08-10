@@ -5,14 +5,53 @@ class Checkbox extends Component {
     isChecked: false
   };
 
-  toggleCheckboxChange = () => {
-    const { handleCheckboxChange, label } = this.props;
+  componentDidMount = () => {
+    this.refreshStateWithLocalStorage();
 
+    window.addEventListener(
+      "beforeunload",
+      this.saveSetToLocalStorage.bind(this)
+    )
+  }
+
+  componentWillMount = () => {
+      this.selectedCheckboxes = new Set();
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener(
+      "beforeunload",
+      this.saveSetToLocalStorage.bind(this)
+    );
+
+    this.saveSetToLocalStorage();
+  }
+  
+  refreshStateWithLocalStorage = () => {
+    if (localStorage.hasOwnProperty(this.props.id)) {
+      this.setState({
+        isChecked: true
+      });
+    }
+  }
+
+  saveSetToLocalStorage = () => {
+    localStorage.setItem(this.props.id, true);
+  }
+
+  toggleCheckBox = key => {
+    if (this.selectedCheckboxes.has(key))
+      this.selectedCheckboxes.delete(key);
+    else
+      this.selectedCheckboxes.add(key);
+  }
+
+  toggleCheckboxChange = () => {
     this.setState(({ isChecked }) => ({
       isChecked: !isChecked
     }));
 
-    handleCheckboxChange(label);
+    this.toggleCheckBox(this.props.id);
   };
 
   render() {
@@ -21,8 +60,7 @@ class Checkbox extends Component {
         <label>
           <input
             type="checkbox"
-            value={this.props.content}
-            checked={this.props.isChecked}
+            checked={this.state.isChecked}
             onChange={this.toggleCheckboxChange}
           />
           {this.props.content}
