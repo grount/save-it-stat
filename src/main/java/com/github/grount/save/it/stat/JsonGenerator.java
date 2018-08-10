@@ -17,6 +17,7 @@ public class JsonGenerator {
     private static final FileBase<JSONObject> fileBase = new FileBase(Constants.ELEMENTS_PATH, JSONObject::new);
 
     private JsonGenerator() {
+        throw new AssertionError();
     }
 
     public static void generate(@Nonnull Type type) {

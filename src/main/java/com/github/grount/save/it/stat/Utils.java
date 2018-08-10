@@ -14,7 +14,9 @@ public class Utils {
 
     public static final String WRITING_TO_FILE_ERROR_MESSAGE = "Unable to save %s file: %s";
 
-    private Utils() {}
+    private Utils() {
+        throw new AssertionError();
+    }
 
     protected static void setFieldOfPropertiesFile(Properties properties, Path path, String key,
                                                    String value, Logger logger) {

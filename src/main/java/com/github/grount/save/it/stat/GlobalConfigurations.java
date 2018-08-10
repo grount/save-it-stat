@@ -10,6 +10,7 @@ public class GlobalConfigurations {
     private static final FileBase<Properties> propertiesBase = new FileBase(Constants.CONFIG_LOCATION, Properties::new);
 
     private GlobalConfigurations() {
+        throw new AssertionError();
     }
 
     public static void setDefaultConfigurations() {

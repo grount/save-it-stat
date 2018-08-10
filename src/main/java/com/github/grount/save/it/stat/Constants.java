@@ -1,7 +1,7 @@
 package com.github.grount.save.it.stat;
 
 public class Constants {
-    private Constants() {}
+    private Constants() { throw new AssertionError();}
     protected static final String DEFAULT_PATH = "src//main//javascript//src//";
     protected static final String FILE_EXISTENCE_NAME = "file-existence.json";
     protected static final String FILE_EXISTENCE_LOCATION = DEFAULT_PATH + FILE_EXISTENCE_NAME;
