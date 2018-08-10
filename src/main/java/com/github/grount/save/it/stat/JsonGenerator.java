@@ -14,7 +14,7 @@ import static com.github.grount.save.it.stat.Constants.ELEMENTS_NAME;
 
 public class JsonGenerator {
     private static Type type;
-    private static final FileBase fileBase = new FileBase(Constants.ELEMENTS_PATH, JSONObject::new);
+    private static final FileBase<JSONObject> fileBase = new FileBase(Constants.ELEMENTS_PATH, JSONObject::new);
 
     private JsonGenerator() {
     }
