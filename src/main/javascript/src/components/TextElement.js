@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { ListGroupItem, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 
-export default class Element extends Component {
+export default class TextElement extends Component {
     render() {
         return (
             <ListGroupItem>

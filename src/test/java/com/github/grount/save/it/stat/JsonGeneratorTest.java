@@ -16,7 +16,7 @@ class JsonGeneratorTest {
 
     @BeforeAll
     static void initAll() {
-        type = new Text("myTitle", "Awesome content");
+        type = new TextType("myTitle", "Awesome content");
         path = Paths.get(Constants.DEFAULT_PATH + "elements.json");
     }
 
@@ -38,7 +38,7 @@ class JsonGeneratorTest {
     @Test
     @DisplayName("Generate function appends to json if it exists")
     void generate_ifJsonExists_appendToIt() {
-        Type newType = new Text("Another title", "Even better content");
+        Type newType = new TextType("Another title", "Even better content");
         TestUtils.deleteIfFilesExists(path);
         JsonGenerator.generate(type);
         JsonGenerator.generate(newType);
