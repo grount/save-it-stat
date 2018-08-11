@@ -5,14 +5,15 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
-public class GlobalConfigurations {
+class GlobalConfigurations {
     private static final Set<String> configurations = new HashSet<>(Arrays.asList("default.location"));
     private static final FileBase<Properties> propertiesBase = new FileBase(Constants.CONFIG_LOCATION, Properties::new);
 
     private GlobalConfigurations() {
+        throw new AssertionError();
     }
 
-    public static void setDefaultConfigurations() {
+    static void setDefaultConfigurations() {
         if (isPathDoesNotExists())
             createDefaultConfigurations();
     }
@@ -25,7 +26,7 @@ public class GlobalConfigurations {
         setConfigurationValue("default.location", System.getProperty("user.home"));
     }
 
-    public static void setConfigurationValue(String key, String value) {
+    static void setConfigurationValue(String key, String value) {
         if (configurations.contains(key))
             Utils.setFieldOfPropertiesFile(propertiesBase, key, value);
         else

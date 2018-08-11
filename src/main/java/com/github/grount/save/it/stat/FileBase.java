@@ -7,7 +7,7 @@ import java.util.function.Supplier;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
-public class FileBase<T> {
+class FileBase<T> {
     private final LogManager logManager = LogManager.getLogManager();
     private final Logger logger = logManager.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private Supplier<T> fileType;
@@ -18,15 +18,15 @@ public class FileBase<T> {
         this.fileType = fileType;
     }
 
-    public Logger getLogger() {
+    Logger getLogger() {
         return logger;
     }
 
-    public Path getPath() {
+    Path getPath() {
         return path;
     }
 
-    public T getFileType() {
+    T getFileType() {
         return fileType.get();
     }
 }

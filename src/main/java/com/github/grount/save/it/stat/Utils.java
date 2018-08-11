@@ -10,14 +10,16 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Utils {
+class Utils {
 
-    public static final String WRITING_TO_FILE_ERROR_MESSAGE = "Unable to save %s file: %s";
+    static final String WRITING_TO_FILE_ERROR_MESSAGE = "Unable to save %s file: %s";
 
-    private Utils() {}
+    private Utils() {
+        throw new AssertionError();
+    }
 
-    protected static void setFieldOfPropertiesFile(Properties properties, Path path, String key,
-                                                   String value, Logger logger) {
+    static void setFieldOfPropertiesFile(Properties properties, Path path, String key,
+                                         String value, Logger logger) {
         try (BufferedWriter bw = Files.newBufferedWriter(path)) {
             properties.setProperty(key, value);
             properties.store(bw, null);
@@ -27,13 +29,13 @@ public class Utils {
         }
     }
 
-    protected static void setFieldOfPropertiesFile(FileBase fileBase, String key, String value) {
+    static void setFieldOfPropertiesFile(FileBase fileBase, String key, String value) {
         Utils.setFieldOfPropertiesFile((Properties) fileBase.getFileType(), fileBase.getPath(),
                 key, value, fileBase.getLogger());
     }
 
-    protected static void createJsonWithField(FileBase fileBase, String key, String value) {
-        try(BufferedWriter bw = Files.newBufferedWriter(fileBase.getPath())) {
+    static void createJsonWithField(FileBase fileBase, String key, String value) {
+        try (BufferedWriter bw = Files.newBufferedWriter(fileBase.getPath())) {
             JSONObject parent = (JSONObject) fileBase.getFileType();
             parent.put(key, value);
             bw.write(parent.toString());
@@ -43,7 +45,7 @@ public class Utils {
         }
     }
 
-    protected static void setJsonField(FileBase fileBase, String key, String value) {
+    static void setJsonField(FileBase fileBase, String key, String value) {
         try {
             String jsonContent = new String(Files.readAllBytes(fileBase.getPath()));
             JSONObject jsonObject = new JSONObject(jsonContent);
@@ -55,7 +57,7 @@ public class Utils {
         }
     }
 
-    private static void writeGivenJsonToFile(FileBase fileBase, JSONObject jsonObject) throws IOException {
+    static void writeGivenJsonToFile(FileBase fileBase, JSONObject jsonObject) throws IOException {
         try (BufferedWriter bw = Files.newBufferedWriter(fileBase.getPath())) {
             bw.write(jsonObject.toString());
         }
