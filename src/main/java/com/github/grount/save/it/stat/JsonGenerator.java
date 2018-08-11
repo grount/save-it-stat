@@ -11,16 +11,15 @@ import java.util.logging.Level;
 
 import static com.github.grount.save.it.stat.Constants.ELEMENTS_NAME;
 
-
-public class JsonGenerator {
-    private static Type type;
+class JsonGenerator {
     private static final FileBase<JSONObject> fileBase = new FileBase(Constants.ELEMENTS_PATH, JSONObject::new);
+    private static Type type;
 
     private JsonGenerator() {
         throw new AssertionError();
     }
 
-    public static void generate(@Nonnull Type type) {
+    static void generate(@Nonnull Type type) {
         JsonGenerator.type = type;
 
         if (fileBase.getPath().toFile().exists())

@@ -17,7 +17,7 @@ class TextTypeTest {
 
     public void convertToJSON_fromClassFieldsHelper(Type type) {
         JSONObject expectedJson = new JSONObject();
-        expectedJson.put("type", type.getType());
+        expectedJson.put("type", type.getTaskType());
         expectedJson.put("title", "title");
         expectedJson.put("content", "content");
         expectedJson.put("id", type.getJsonObject().get("id"));

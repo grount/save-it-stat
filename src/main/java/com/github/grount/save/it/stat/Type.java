@@ -4,15 +4,15 @@ import org.json.JSONObject;
 
 import java.util.UUID;
 
-public abstract class Type {
+abstract class Type {
     private String title;
     private String content;
-    private String type;
+    private String taskType;
     private UUID uuid;
     private JSONObject jsonObject;
 
-    public Type(String type, String title, String content) {
-        this.type = type;
+    Type(String taskType, String title, String content) {
+        this.taskType = taskType;
         this.title = title;
         this.content = content;
         this.uuid = UUID.randomUUID();
@@ -21,39 +21,39 @@ public abstract class Type {
 
     private void initializeJsonObject() {
         this.jsonObject = new JSONObject();
-        this.jsonObject.put("type", type);
+        this.jsonObject.put("type", taskType);
         this.jsonObject.put("id", uuid);
     }
 
-    public abstract String convertToJson();
+    abstract String convertToJson();
 
-    protected abstract void initializeJsonObject(String title, String content);
+    abstract void initializeJsonObject(String title, String content);
 
     JSONObject getJsonObject() {
         return jsonObject;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         this.title = title;
     }
 
-    public String getContent() {
+    String getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    void setContent(String content) {
         this.content = content;
     }
 
-    public UUID getUuid() {
+    UUID getUuid() {
         return uuid;
     }
 
-    public String getType() {
-        return type;
+    String getTaskType() {
+        return taskType;
     }
 }

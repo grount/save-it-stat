@@ -1,10 +1,13 @@
 package com.github.grount.save.it.stat;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ArgumentsConverter {
+class ArgumentsConverter {
     private static final String[] FULL_ARGUMENTS = {"title", "content"};
     private static final String VALID_ARGUMENT_REGEX =
             "^(\\-|\\-\\-)[a-z]*=\".*\""; // The regex is in the form of --".*" or --".*"
@@ -20,14 +23,14 @@ public class ArgumentsConverter {
     private ArgumentsConverter() {
     }
 
-    public static Map<String,String> convert(String[] arguments) {
+    static Map<String, String> convert(String[] arguments) {
         checkFormValidity(arguments);
         Map<String, String> splittedArguments = splitArguments(arguments);
         checkLeftSideValidity(splittedArguments);
         return convertShortArgumentsToFull(splittedArguments);
     }
 
-    private static Map<String,String> convertShortArgumentsToFull(Map<String, String> arguments) {
+    private static Map<String, String> convertShortArgumentsToFull(Map<String, String> arguments) {
         HashMap<String, String> newArgumentMap = new HashMap<>();
 
         arguments.forEach((key, value) -> {
@@ -63,7 +66,7 @@ public class ArgumentsConverter {
         return Character.toString(argument.charAt(0));
     }
 
-    public static void checkFormValidity(String[] arguments) {
+    static void checkFormValidity(String[] arguments) {
         Pattern pattern = Pattern.compile(VALID_ARGUMENT_REGEX);
         for (String argument : arguments) {
             Matcher matcher = pattern.matcher(argument);
@@ -73,7 +76,7 @@ public class ArgumentsConverter {
     }
 
     private static void checkLeftSideValidity(Map<String, String> arguments) {
-        arguments.forEach((key,value) -> {
+        arguments.forEach((key, value) -> {
             if (!validArgumentsSet.contains(key))
                 throw new IllegalArgumentException(String.format("The argument: %s is invalid", key));
         });
