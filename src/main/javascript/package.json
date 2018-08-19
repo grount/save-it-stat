@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Electron application for saving different types of data using CLI or GUI",
   "main": "src/main.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/grount/save-it-stat.git"
-  },
   "scripts": {
     "build": "npm install",
     "start": "electron .",
