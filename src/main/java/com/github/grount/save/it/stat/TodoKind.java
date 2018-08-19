@@ -2,10 +2,10 @@ package com.github.grount.save.it.stat;
 
 import org.json.JSONObject;
 
-class TodoType extends Type {
+class TodoKind extends Kind {
     private static String type = "todo";
 
-    TodoType(String title, String content) {
+    TodoKind(String title, String content) {
         super(type, title, content);
         initializeJsonObject(title, content);
     }

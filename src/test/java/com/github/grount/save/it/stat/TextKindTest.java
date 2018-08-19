@@ -6,22 +6,22 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TextTypeTest {
+class TextKindTest {
 
     @Test
     @DisplayName("Given a type it should generate json element properly")
     void convertToJSON_fromClassFields() {
-        Type type = new TextType("title", "content");
-        convertToJSON_fromClassFieldsHelper(type);
+        Kind kind = new TextKind("title", "content");
+        convertToJSON_fromClassFieldsHelper(kind);
     }
 
-    public void convertToJSON_fromClassFieldsHelper(Type type) {
+    public void convertToJSON_fromClassFieldsHelper(Kind kind) {
         JSONObject expectedJson = new JSONObject();
-        expectedJson.put("type", type.getTaskType());
+        expectedJson.put("kind", kind.getTaskType());
         expectedJson.put("title", "title");
         expectedJson.put("content", "content");
-        expectedJson.put("id", type.getJsonObject().get("id"));
+        expectedJson.put("id", kind.getJsonObject().get("id"));
 
-        assertEquals(type.convertToJson(), expectedJson.toString());
+        assertEquals(kind.convertToJson(), expectedJson.toString());
     }
 }

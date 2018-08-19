@@ -1,19 +1,57 @@
 {
-  "name": "javascript",
-  "version": "0.1.0",
-  "private": true,
+  "name": "save-it-stat",
+  "version": "1.0.0",
+  "description": "Electron application for saving different types of data using CLI or GUI",
+  "main": "src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grount/save-it-stat.git"
+  },
+  "scripts": {
+    "build": "npm install",
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^2.0.7",
+    "electron-builder": "^20.28.1"
+  },
   "dependencies": {
     "bootstrap": "^4.1.3",
     "jquery": "^3.3.1",
-    "react": "^16.4.2",
-    "react-dom": "^16.4.2",
-    "react-scripts": "1.1.4",
-    "reactstrap": "^6.3.1"
+    "popper.js": "^1.14.4"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "build": {
+    "appId": "save-it-stat",
+    "nsis": {
+      "createStartMenuShortcut": true
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "NSIS"
+    }
   }
 }

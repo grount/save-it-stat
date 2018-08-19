@@ -7,7 +7,7 @@ import java.util.Set;
 
 class GlobalConfigurations {
     private static final Set<String> configurations = new HashSet<>(Arrays.asList("default.location"));
-    private static final FileBase<Properties> propertiesBase = new FileBase(Constants.CONFIG_LOCATION, Properties::new);
+    private static final FileBase<Properties> propertiesBase = new FileBase<>(Constants.CONFIG_LOCATION, Properties::new);
 
     private GlobalConfigurations() {
         throw new AssertionError();
