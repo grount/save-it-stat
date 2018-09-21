@@ -51,6 +51,9 @@ file-existence.json
 # production
 **/build
 
+# deployment
+**/dist
+
 # misc
 .DS_Store
 .env.local
@@ -61,3 +64,6 @@ file-existence.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# vscode
+**/.vscode

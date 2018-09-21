@@ -10,13 +10,13 @@ import static com.github.grount.save.it.stat.ArgumentsConverter.convert;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArgumentsConverterTest {
-    private String[] validFullArguments = {"--title=\"title\"", "--content=\"content\""};
-    private String[] invalidFullArguments = {"--title=\"title\"", "--contant=\"content\""};
-    private String[] validShortArguments = {"-t=\"title\"", "-c=\"content\""};
-    private String[] invalidShortArguments = {"-k=\"t\"", "-c=\"content\""};
-    private String[] validMixedArguments = {"-t=\"title\"", "--content=\"content\""};
-    private String[] validForm = {"-k=\"value 342\"", "--y=\"val\""};
-    private String[] invalidForm = {"title=\"title\"", "--content=\"content\"", "-test=\"t\""};
+    private String[] validFullArguments = {"--title=title", "--content=content"};
+    private String[] invalidFullArguments = {"--title=title", "--contant=content"};
+    private String[] validShortArguments = {"-t=title", "-c=content"};
+    private String[] invalidShortArguments = {"-f=t", "-c=content"};
+    private String[] validMixedArguments = {"-t=title", "--content=content"};
+    private String[] validForm = {"-k=value 342", "--y=val"};
+    private String[] invalidForm = {"title=title", "--content=content", "-test=t"};
 
     @Test
     @DisplayName("Valid full name arguments should not throw exception")
@@ -66,7 +66,9 @@ class ArgumentsConverterTest {
         @Test
         @DisplayName("Convert short arguments should return a valid map")
         void convert_givenShortArguments_returnValidMap() {
-            assertTrue(convert(validShortArguments).equals(argumentsMap));
+            Map<String, String> map = convert(validShortArguments);
+            boolean state = map.equals(argumentsMap);
+            assertTrue(state);
         }
 
         @Test

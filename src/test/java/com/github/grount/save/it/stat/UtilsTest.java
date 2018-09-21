@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UtilsTest {
     private static Path path = Paths.get(FILE_EXISTENCE_LOCATION);
-    private static FileBase fileBase = new FileBase(FILE_EXISTENCE_LOCATION, JSONObject::new);
+    private static FileBase<JSONObject> fileBase = new FileBase<>(FILE_EXISTENCE_LOCATION, JSONObject::new);
 
     @AfterAll
     static void deleteTestingFile() {
