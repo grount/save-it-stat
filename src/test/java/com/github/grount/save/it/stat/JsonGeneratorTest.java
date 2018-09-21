@@ -17,7 +17,7 @@ class JsonGeneratorTest {
     @BeforeAll
     static void initAll() {
         kind = new TextKind("myTitle", "Awesome content");
-        path = Paths.get(Constants.DEFAULT_PATH + "elements.json");
+        path = Paths.get(Constants.ELEMENTS_PATH);
     }
 
     @Test
@@ -53,4 +53,5 @@ class JsonGeneratorTest {
         JsonGenerator.generate(kind);
         assertTrue(Paths.get(Constants.ELEMENTS_PATH).toFile().exists());
     }
+
 }

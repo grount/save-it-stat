@@ -7,6 +7,7 @@ import javax.annotation.Nonnull;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static com.github.grount.save.it.stat.Constants.ELEMENTS_NAME;
@@ -17,6 +18,14 @@ class JsonGenerator {
 
     private JsonGenerator() {
         throw new AssertionError();
+    }
+
+    static void initalize(@Nonnull Kind kind) {
+        Objects.requireNonNull(kind);
+        JsonGenerator.kind = kind;
+
+
+
     }
 
     static void generate(@Nonnull Kind kind) {
