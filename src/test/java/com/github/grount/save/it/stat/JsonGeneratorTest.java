@@ -11,13 +11,13 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class JsonGeneratorTest {
-    private static Type type;
+    private static Kind kind;
     private static Path path;
 
     @BeforeAll
     static void initAll() {
-        type = new TextType("myTitle", "Awesome content");
-        path = Paths.get(Constants.DEFAULT_PATH + "elements.json");
+        kind = new TextKind("myTitle", "Awesome content");
+        path = Paths.get(Constants.ELEMENTS_PATH);
     }
 
     @Test
@@ -32,25 +32,26 @@ class JsonGeneratorTest {
     void generate_createsJson_withFieldsExists() {
         TestUtils.deleteIfFilesExists(path);
         generateAndAssertFileExists();
-        assertTrue(TestUtils.getFileContent(path).contains(type.convertToJson()));
+        assertTrue(TestUtils.getFileContent(path).contains(kind.convertToJson()));
     }
 
     @Test
     @DisplayName("Generate function appends to json if it exists")
     void generate_ifJsonExists_appendToIt() {
-        Type newType = new TextType("Another title", "Even better content");
+        Kind newKind = new TextKind("Another title", "Even better content");
         TestUtils.deleteIfFilesExists(path);
-        JsonGenerator.generate(type);
-        JsonGenerator.generate(newType);
+        JsonGenerator.generate(kind);
+        JsonGenerator.generate(newKind);
         String fileContent = TestUtils.getFileContent(path);
 
-        assertAll(() -> assertTrue(fileContent.contains(type.convertToJson())),
-                () -> assertTrue(fileContent.contains(newType.convertToJson()))
+        assertAll(() -> assertTrue(fileContent.contains(kind.convertToJson())),
+                () -> assertTrue(fileContent.contains(newKind.convertToJson()))
         );
     }
 
     private void generateAndAssertFileExists() {
-        JsonGenerator.generate(type);
+        JsonGenerator.generate(kind);
         assertTrue(Paths.get(Constants.ELEMENTS_PATH).toFile().exists());
     }
+
 }

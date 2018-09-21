@@ -7,25 +7,47 @@ import javax.annotation.Nonnull;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 import java.util.logging.Level;
 
 import static com.github.grount.save.it.stat.Constants.ELEMENTS_NAME;
 
 class JsonGenerator {
-    private static final FileBase<JSONObject> fileBase = new FileBase(Constants.ELEMENTS_PATH, JSONObject::new);
-    private static Type type;
+    private static final FileBase<JSONObject> fileBase = new FileBase<>(Constants.ELEMENTS_PATH, JSONObject::new);
+    private static Kind kind;
 
     private JsonGenerator() {
         throw new AssertionError();
     }
 
-    static void generate(@Nonnull Type type) {
-        JsonGenerator.type = type;
+    static void initalize(@Nonnull Kind kind) {
+        Objects.requireNonNull(kind);
+        JsonGenerator.kind = kind;
+
+
+
+    }
+
+    static void generate(@Nonnull Kind kind) {
+        JsonGenerator.kind = kind;
 
         if (fileBase.getPath().toFile().exists())
-            appendTypeToExistingJson();
+            decideWhichActionToCall();
         else
-            createJsonWithType(type.getJsonObject());
+            createJsonWithType(kind.getJsonObject());
+    }
+
+    private static void decideWhichActionToCall() {
+        try {
+            String json = new String(Files.readAllBytes(fileBase.getPath()));
+            if (json.equals("{}")) {
+                createJsonWithType(kind.getJsonObject());
+            } else {
+               appendTypeToExistingJson();
+            }
+        } catch (IOException e) {
+            fileBase.getLogger().log(Level.SEVERE, "Cannot read json content: {0}", e.getMessage());
+        }
     }
 
     private static void createJsonWithType(JSONObject objectToWrite) {
@@ -35,8 +57,9 @@ class JsonGenerator {
             jsonArray.put(objectToWrite);
             parent.put(ELEMENTS_NAME, jsonArray);
             bw.write(parent.toString());
+            bw.flush();
         } catch (IOException e) {
-            fileBase.getLogger().log(Level.SEVERE, "Cannot save type to json: {0}", e.getMessage());
+            fileBase.getLogger().log(Level.SEVERE, "Cannot create json kind: {0}", e.getMessage());
         }
     }
 
@@ -46,13 +69,13 @@ class JsonGenerator {
             JSONObject jsonObject = new JSONObject(json);
             appendToJson(jsonObject);
         } catch (IOException e) {
-            fileBase.getLogger().log(Level.SEVERE, "Cannot append type to json: {0}", e.getMessage());
+            fileBase.getLogger().log(Level.SEVERE, "Cannot append kind to json: {0}", e.getMessage());
         }
     }
 
     private static void appendToJson(JSONObject jsonObject) throws IOException {
         JSONArray jsonArray = jsonObject.getJSONArray(ELEMENTS_NAME);
-        jsonArray.put(type.getJsonObject());
+        jsonArray.put(kind.getJsonObject());
 
         try (BufferedWriter bw = Files.newBufferedWriter(fileBase.getPath())) {
             JSONObject parent = new JSONObject();

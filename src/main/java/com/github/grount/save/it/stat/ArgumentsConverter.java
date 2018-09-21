@@ -8,9 +8,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class ArgumentsConverter {
-    private static final String[] FULL_ARGUMENTS = {"title", "content"};
+    private static final String[] FULL_ARGUMENTS = {"title", "content", "kind"};
     private static final String VALID_ARGUMENT_REGEX =
-            "^(\\-|\\-\\-)[a-z]*=\".*\""; // The regex is in the form of --".*" or --".*"
+            "^(\\-|\\-\\-)[a-z]*=.*"; // The regex is in the form of --".*" or --".*"
 
     private static Set<String> validArgumentsSet;
     private static Map<String, String> shortArgumentMap;
@@ -88,7 +88,7 @@ class ArgumentsConverter {
         for (String argument : arguments) {
             String[] values = argument.split("=", 2);
             String leftValue = trimStartingMinus(values[0]);
-            String rightValue = values[1].substring(1, values[1].length() - 1);
+            String rightValue = values[1];
             splittedArguments.put(leftValue, rightValue);
         }
 

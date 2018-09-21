@@ -2,11 +2,11 @@ package com.github.grount.save.it.stat;
 
 import org.json.JSONObject;
 
-class TextType extends Type {
-    private static String type = "text";
+class TextKind extends Kind {
+    private static String kind = "text";
 
-    TextType(String title, String content) {
-        super(type, title, content);
+    TextKind(String title, String content) {
+        super(kind, title, content);
         initializeJsonObject(title, content);
     }
 

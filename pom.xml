@@ -19,6 +19,15 @@
 
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/javascript/dist</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>win-unpacked</exclude>
+                </excludes>
+            </resource>
+        </resources>
         <plugins>
             <!-- This plugin is added until Junit 5 is supported-->
             <plugin>
@@ -43,25 +52,23 @@
                         <goals>
                             <goal>install-node-and-npm</goal>
                         </goals>
-
                     </execution>
                     <execution>
                         <id>npm install</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>npm run build</id>
+                        <id>create installer</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>run build</arguments>
+                            <arguments>run dist</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -71,6 +78,45 @@
                     <installDirectory>target</installDirectory>
                     <workingDirectory>src/main/javascript</workingDirectory>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.github.grount.save.it.stat.SaveItStat</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- Copy all the additional required dependencies-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>
+                                ${project.build.directory}/lib
+                            </outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
@@ -94,7 +140,7 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180130</version>
+            <version>20180813</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.findbugs</groupId>
